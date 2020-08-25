@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DrugInfoModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Classifications">
+    <Key>
+      <PropertyRef Name="ClassificationId" />
+    </Key>
+    <Property Name="ClassificationId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ClassificationCode" Type="String" MaxLength="3" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Drugs" Relationship="Self.FK_dbo_Drugs_dbo_Classifications_ClassificationId" FromRole="Classifications" ToRole="Drugs" />
+  </EntityType>
+  <EntityType Name="Drugs">
+    <Key>
+      <PropertyRef Name="DrugId" />
+    </Key>
+    <Property Name="DrugId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DrugCode" Type="String" MaxLength="12" FixedLength="false" Unicode="true" />
+    <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="Company" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ClassificationId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Classifications" Relationship="Self.FK_dbo_Drugs_dbo_Classifications_ClassificationId" FromRole="Drugs" ToRole="Classifications" />
+  </EntityType>
+  <Association Name="FK_dbo_Drugs_dbo_Classifications_ClassificationId">
+    <End Role="Classifications" Type="Self.Classifications" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Drugs" Type="Self.Drugs" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Classifications">
+        <PropertyRef Name="ClassificationId" />
+      </Principal>
+      <Dependent Role="Drugs">
+        <PropertyRef Name="ClassificationId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="DrugInfoContext" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Classifications" EntityType="Self.Classifications" />
+    <EntitySet Name="Drugs" EntityType="Self.Drugs" />
+    <AssociationSet Name="FK_dbo_Drugs_dbo_Classifications_ClassificationId" Association="Self.FK_dbo_Drugs_dbo_Classifications_ClassificationId">
+      <End Role="Classifications" EntitySet="Classifications" />
+      <End Role="Drugs" EntitySet="Drugs" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

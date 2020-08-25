@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="DrugInfoModelStoreContainer" CdmEntityContainer="DrugInfoContext">
+    <EntitySetMapping Name="Classifications">
+      <EntityTypeMapping TypeName="DrugInfoModel.Classifications">
+        <MappingFragment StoreEntitySet="Classifications">
+          <ScalarProperty Name="ClassificationId" ColumnName="ClassificationId" />
+          <ScalarProperty Name="ClassificationCode" ColumnName="ClassificationCode" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Drugs">
+      <EntityTypeMapping TypeName="DrugInfoModel.Drugs">
+        <MappingFragment StoreEntitySet="Drugs">
+          <ScalarProperty Name="DrugId" ColumnName="DrugId" />
+          <ScalarProperty Name="DrugCode" ColumnName="DrugCode" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Company" ColumnName="Company" />
+          <ScalarProperty Name="ClassificationId" ColumnName="ClassificationId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
